@@ -1,0 +1,18 @@
+#:kivy 1.11.1
+
+<Tiles>:
+    size_hint_y:.6#add demensions
+    size_hint_x:None #this doesnt do anythong because its taking in dafault values
+    #using canvas to draw rectangels need to replace for images
+    canvas:
+        # Color:
+        #     rgb:0,0,0
+
+        Rectangle:
+            size:self.size
+            pos: self.pos
+            #boarder:'10dp'
+
+        Line:
+            width: 20
+            rectangle: self.x, self.y, self.width, self.height

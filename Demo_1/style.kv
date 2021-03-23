@@ -1,0 +1,101 @@
+#:kivy 1.11.1
+<GameOverButton>:
+    reset:reset
+    MyButton
+        id:reset
+        on_press: app.reset_game_app()
+        text: 'Awww... try again?'
+        size: 300,200
+        pos:650,550
+
+
+<GameScreen>:
+    id:main
+    score:score
+    life:life
+
+    #--adding a background color
+    canvas.before:
+        Color:
+            rgb:.5,.7,1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+    #
+    Image:
+        source: 'factory_road.png'
+        pos: 0,-200
+        size:root.width,root.height
+        allow_stretch: True
+
+    MyButton
+        id:new_game_btn
+        on_press: root.new_game()
+        size: root.width,root.height/10
+        pos: root.center_x-self.width/2,root.center_y-self.height/2
+        text: 'Start Game'
+
+    Label:
+        id:life
+        size: self.texture_size
+        pos: 0,root.height - self.size[1]*2.1
+        text_size: None, None
+        font_size: 80
+        canvas.before:
+            Color:
+                rgb:0,0,0
+            Rectangle:
+                pos: self.pos
+                size:self.texture_size
+
+
+        Label:
+            id:score
+            size: self.texture_size
+            pos: 0,root.height - self.size[1]
+            text_size: None, None
+            font_size: 80
+            canvas.before:
+                Color:
+                    rgb:0,0,0
+                Rectangle:
+                    pos: self.pos
+                    size:self.texture_size
+
+
+    #test using relative layout for the player buttons
+    RelativeLayout:
+        size_hint: None, None
+        size: root.width, root.height
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+
+        MyButton
+            on_press: root.del_tile(1)
+            pos_hint: {'x': 0, 'y': .005 + self.size_hint[1]}
+            text: 'RED'
+            #on_state:
+                #print("my current state is {}".format(self.state))
+
+        MyButton
+            on_press: root.del_tile(2)
+            pos_hint: {'x': 1-self.size_hint[0], 'y': .005 + self.size_hint[1]}
+            text: 'Blue'
+
+        MyButton
+            on_press: root.del_tile(3)
+            pos_hint: {'left': 1, 'bottom': 1}
+            text: 'Green'
+
+        MyButton
+            on_press: root.del_tile(4)
+            pos_hint: {'right': 1, 'bottom': 1}
+            text: 'Yellow'
+
+
+
+
+
+<MyButton@Button>
+    size_hint: .15,.15
